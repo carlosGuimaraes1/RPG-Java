@@ -1,9 +1,9 @@
 package domain.enums;
 
 public enum CharacterClass {
-    WARRIOR(1, 14, 10),
-    MAGE(2, 10, 12),
-    ARCHER(3, 12, 14);
+    WARRIOR(1, 12, 8),
+    MAGE(2, 8, 10),
+    ARCHER(3, 10, 8);
 
     private int value;
     private int strength;

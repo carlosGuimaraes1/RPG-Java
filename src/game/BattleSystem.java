@@ -1,14 +1,8 @@
-package Game;
+package game;
 
-import domain.entidy.Enemy;
-import domain.entidy.Entidy;
-import domain.entidy.Player;
-import domain.enums.CharacterClass;
-import domain.enums.ConsoleColor;
-import domain.enums.Difficulty;
-import domain.item.HealPotion;
-import domain.item.Potion;
-import domain.item.StrengthPotion;
+import domain.entidy.*;
+import domain.enums.*;
+import domain.item.*;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -130,14 +124,15 @@ public class BattleSystem {
                         input.nextLine();
 
                         if (choiceDefend == 1) {
-                            double reducedDamage = Math.max(0, currentEnemy.getStrength() - 2);
+                            double reducedDamage = currentEnemy.getStrength()-2;
                             player.receiveDamage((int) reducedDamage);
-                            System.out.println("You received " + (reducedDamage - player.getDefense()) + " damage.");
+
+                            System.out.println("You received " + reducedDamage + " damage.");
                             System.out.println("Your life " + player.getCurrentLife());
                             System.out.println("Press Enter to continue...");
                             input.nextLine();
                             if (!player.isAlive()) {
-                                System.out.println(ConsoleColor.RED.ansiCode + "Game Over" + ConsoleColor.RESET.ansiCode);
+                                System.out.println(ConsoleColor.RED.ansiCode + "game Over" + ConsoleColor.RESET.ansiCode);
                                 player.setCurrentLife(100);
                                 wolf.revive();
                                 orc.revive();
@@ -147,7 +142,8 @@ public class BattleSystem {
                                 input.nextLine();
                                 break;
                             }
-                        } else if (choiceDefend == 2) {
+                        }
+                        if (choiceDefend == 2) {
                             if (player.dogde()) {
                                 System.out.println("you deviated. you received no harm.");
                                 System.out.println("Press Enter to continue...");
@@ -161,7 +157,7 @@ public class BattleSystem {
                                 input.nextLine();
 
                                 if (!player.isAlive()) {
-                                    System.out.println(ConsoleColor.RED.ansiCode + " Game Over " + ConsoleColor.RESET.ansiCode);
+                                    System.out.println(ConsoleColor.RED.ansiCode + " game Over " + ConsoleColor.RESET.ansiCode);
                                     player.setCurrentLife(100);
                                     wolf.revive();
                                     orc.revive();
@@ -211,6 +207,7 @@ public class BattleSystem {
                 case 4:
                     System.out.println("=== INVENTORY ===");
                     ArrayList<Potion> bag = player.getInventory();
+
                     if (bag.isEmpty()) {
                         System.out.println("Your bag is empty.");
                     } else {

@@ -1,4 +1,4 @@
-package Game;
+package game;
 
 import domain.entidy.Player;
 import domain.item.HealPotion;

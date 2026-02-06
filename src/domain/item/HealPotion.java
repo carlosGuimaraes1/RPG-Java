@@ -3,7 +3,7 @@ package domain.item;
 import domain.enums.ConsoleColor;
 import domain.entidy.Player;
 
-public class HealPotion extends Potion {
+public class HealPotion extends Potion{
 
     public HealPotion() {
         super("Healing potion", 15, 20);
@@ -18,4 +18,5 @@ public class HealPotion extends Potion {
     protected ConsoleColor getColorCode() {
         return ConsoleColor.GREEN;
     }
+
 }

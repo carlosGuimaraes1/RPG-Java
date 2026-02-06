@@ -1,13 +1,8 @@
 package domain.entidy;
-
-import domain.enums.CharacterClass;
 import domain.item.Potion;
-
 import java.util.ArrayList;
-import java.util.IllegalFormatCodePointException;
 
 public class Player extends Entidy {
-
 
     private int gold;
     ArrayList<Potion> inventory;
@@ -29,10 +24,9 @@ public class Player extends Entidy {
     public boolean dogde() {
         if (Math.random() > 0.5) {
             return true;
-            // defendido
+
         }
         return false;
-        //nao defendido
     }
 
     @Override

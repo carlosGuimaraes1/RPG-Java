@@ -7,6 +7,7 @@ public abstract class Entidy {
     protected int strength;
     protected int defense;
 
+
     public Entidy(String name, int currentLife, int strength, int defense) {
         this.name = name;
         this.currentLife = currentLife;
@@ -14,16 +15,16 @@ public abstract class Entidy {
         this.defense = defense;
     }
 
-    public void receiveDamage(int damage) {
+    public int receiveDamage(int damage) {
         int realDamage = damage - defense;
         if (realDamage<=0){
-            realDamage =1;
+            realDamage = 1;
         }
             this.currentLife -= realDamage;
-
         if (currentLife < 0) {
             currentLife = 0;
         }
+        return realDamage;
     }
 
     public abstract void attack(Entidy target);

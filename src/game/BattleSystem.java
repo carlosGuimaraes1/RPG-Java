@@ -3,13 +3,14 @@ package game;
 import domain.entidy.*;
 import domain.enums.*;
 import domain.item.*;
+import utils.InputValidation;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BattleSystem {
     public static void main(String[] args) {
-
+        
         Scanner input = new Scanner(System.in);
 
         System.out.println(ConsoleColor.BLUE.ansiCode + "WELCOME TO GAMEDEV " + ConsoleColor.RESET.ansiCode);
@@ -22,8 +23,7 @@ public class BattleSystem {
 
         while (selectedClass == null) {
             System.out.println(" 1 - for Warrior \n 2 - for Mage \n 3 - for Archer");
-            int classChoice = input.nextInt();
-            input.nextLine();
+            int classChoice = InputValidation.readInt(input);
 
             switch (classChoice) {
                 case 1:
@@ -44,8 +44,7 @@ public class BattleSystem {
         Difficulty difficulty = null;
         while (difficulty == null) {
             System.out.println(" 1 - for Easy \n 2 - for Normal \n 3 - for Hard");
-            int difficultyChoice = input.nextInt();
-            input.nextLine();
+            int difficultyChoice = InputValidation.readInt(input);
 
             switch (difficultyChoice) {
                 case 1:
@@ -62,9 +61,9 @@ public class BattleSystem {
             }
         }
 
-        Enemy wolf = new Enemy("Wolf", 7, 3, difficulty.getReportname(), 80, 80,difficulty.getReportname(), "You hear a growl... A rabid beast is staring right at you.");
-        Enemy orc = new Enemy("Orc", 9, 5, difficulty.getReportname(), 100, 100,difficulty.getReportname(), "'FRESH MEAT!' screams a massive warrior charging at you.");
-        Enemy dragon = new Enemy("Dragon", 12, 7, difficulty.getReportname(), 120, 120,difficulty.getReportname(), "The air burns around you. An ancient terror has awakened!");
+        Enemy wolf = new Enemy("Wolf", 7, 3, difficulty.getReportname(), 80, 80, difficulty.getReportname(), "You hear a growl... A rabid beast is staring right at you.");
+        Enemy orc = new Enemy("Orc", 9, 5, difficulty.getReportname(), 100, 100, difficulty.getReportname(), "'FRESH MEAT!' screams a massive warrior charging at you.");
+        Enemy dragon = new Enemy("Dragon", 12, 7, difficulty.getReportname(), 120, 120, difficulty.getReportname(), "The air burns around you. An ancient terror has awakened!");
 
         Player player = new Player(name, 100, selectedClass.getStrength(), selectedClass.getDefense());
 
@@ -80,8 +79,7 @@ public class BattleSystem {
 
         while (true) {
             System.out.println("1 - Battle: \n2 - Status: \n3 - Shop: \n4 - Inventory: \n0 - Exit:");
-            int choice = input.nextInt();
-            input.nextLine();
+            int choice = InputValidation.readInt(input);
 
             switch (choice) {
                 case 1:
@@ -119,15 +117,19 @@ public class BattleSystem {
                         }
                         System.out.println("\n=== ENEMY TURN ===");
                         System.out.println(currentEnemy.getName() + " prepares to attack\n");
-                        System.out.println("1 - to defend \n2 - to dogde ");
-                        int choiceDefend = input.nextInt();
-                        input.nextLine();
+                        System.out.println("1 - to defend \n2 - to dodge ");
+                        int choiceDefend = InputValidation.readInt(input);
 
+                        while (choiceDefend != 1 && choiceDefend != 2) {
+                            System.out.println("Numero Invalido! digite 1 ou 2");
+                            System.out.println("1 - to defend \n2 - to dodge ");
+                            choiceDefend = InputValidation.readInt(input);
+                        }
                         if (choiceDefend == 1) {
-                            double reducedDamage = currentEnemy.getStrength()-2;
-                            player.receiveDamage((int) reducedDamage);
+                            double reducedDamage = currentEnemy.getStrength() - 2;
+                            int realDamage = player.receiveDamage((int) reducedDamage);
 
-                            System.out.println("You received " + reducedDamage + " damage.");
+                            System.out.println("You received " + realDamage + " damage.");
                             System.out.println("Your life " + player.getCurrentLife());
                             System.out.println("Press Enter to continue...");
                             input.nextLine();
@@ -144,16 +146,17 @@ public class BattleSystem {
                             }
                         }
                         if (choiceDefend == 2) {
-                            if (player.dogde()) {
+                            if (player.dodge()) {
                                 System.out.println("you deviated. you received no harm.");
                                 System.out.println("Press Enter to continue...");
                                 input.nextLine();
                             } else {
                                 int reducedDamage = (int) (currentEnemy.getStrength() * 1.5);
-                                player.receiveDamage(reducedDamage);
+                                int realDamage = player.receiveDamage(reducedDamage);
 
-                                System.out.println("You received " + reducedDamage + " damage.");
-                                System.out.println("Your life " + player.getCurrentLife());System.out.println("Press Enter to continue...");
+                                System.out.println("You received " + realDamage + " damage.");
+                                System.out.println("Your life " + player.getCurrentLife());
+                                System.out.println("Press Enter to continue...");
                                 input.nextLine();
 
                                 if (!player.isAlive()) {
@@ -169,6 +172,7 @@ public class BattleSystem {
                                 }
                             }
                         }
+
                     }
                     break;
                 case 2:
@@ -187,15 +191,14 @@ public class BattleSystem {
 
                     while (true) {
                         System.out.println("1 for buy healing potion \n2 for buy strength potion \n0 for exit");
-                        int choicePotion = input.nextInt();
-                        input.nextLine();
+                        int choicePotion = InputValidation.readInt(input);
 
                         if (choicePotion == 1) {
                             shop.sell(player, choicePotion);
                             System.out.println("You bought the healing potion. ");
                         } else if (choicePotion == 2) {
                             shop.sell(player, choicePotion);
-                            System.out.println("You bought the strength potionn. ");
+                            System.out.println("You bought the strength potion. ");
                         } else if (choicePotion == 0) {
                             System.out.println("leaving the shop");
                             break;
@@ -217,10 +220,10 @@ public class BattleSystem {
                         System.out.println("0 - Return");
 
                         System.out.println("Choose an item that you want to use.");
-                        int item = input.nextInt();
-                        input.nextLine();
+                        int item = InputValidation.readInt(input);
 
-                        if (item > 0 && item < bag.size()) {
+
+                        if (item > 0 && item <=bag.size()) {
                             Potion selectPotion = bag.get(item - 1);
                             selectPotion.use(player);
                             bag.remove(item - 1);
@@ -228,7 +231,6 @@ public class BattleSystem {
                             System.out.println("You use " + selectPotion.getName());
                             System.out.println("Current Life: " + player.getCurrentLife());
                             System.out.println("Current Strength: " + player.getStrength());
-                            input.nextLine();
 
                         } else if (item == 0) {
                             System.out.println("Closing bag...");

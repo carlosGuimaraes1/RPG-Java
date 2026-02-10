@@ -2,7 +2,7 @@ package domain.entidy;
 import domain.item.Potion;
 import java.util.ArrayList;
 
-public class Player extends Entidy {
+public class Player extends Entity {
 
     private int gold;
     ArrayList<Potion> inventory;
@@ -13,7 +13,7 @@ public class Player extends Entidy {
     }
 
     @Override
-    public void attack(Entidy entidy) {
+    public void attack(Entity entidy) {
         entidy.receiveDamage(strength);
     }
 
@@ -21,7 +21,7 @@ public class Player extends Entidy {
         inventory.add(potion);
     }
 
-    public boolean dogde() {
+    public boolean dodge() {
         if (Math.random() > 0.5) {
             return true;
 

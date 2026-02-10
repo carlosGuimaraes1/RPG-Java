@@ -1,6 +1,6 @@
 package domain.entidy;
 
-public abstract class Entidy {
+public abstract class Entity {
     protected String name;
     protected int maxLife = 150;
     protected int currentLife;
@@ -8,7 +8,7 @@ public abstract class Entidy {
     protected int defense;
 
 
-    public Entidy(String name, int currentLife, int strength, int defense) {
+    public Entity(String name, int currentLife, int strength, int defense) {
         this.name = name;
         this.currentLife = currentLife;
         this.strength = strength;
@@ -27,7 +27,7 @@ public abstract class Entidy {
         return realDamage;
     }
 
-    public abstract void attack(Entidy target);
+    public abstract void attack(Entity target);
 
     public boolean isAlive() {
         if (currentLife > 0) {

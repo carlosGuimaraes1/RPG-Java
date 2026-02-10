@@ -2,7 +2,7 @@ package domain.entidy;
 
 import domain.enums.Difficulty;
 
-public class Enemy extends Entidy {
+public class Enemy extends Entity {
 
     private String description;
 
@@ -16,7 +16,7 @@ public class Enemy extends Entidy {
     }
 
     @Override
-    public void attack(Entidy entidy) {
+    public void attack(Entity entidy) {
         entidy.receiveDamage(strength);
     }
 

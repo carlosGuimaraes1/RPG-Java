@@ -24,7 +24,6 @@ public class Player extends Entity {
     public boolean dodge() {
         if (Math.random() > 0.5) {
             return true;
-
         }
         return false;
     }

@@ -1,10 +1,8 @@
 package game;
-
 import domain.entidy.*;
 import domain.enums.*;
 import domain.item.*;
 import utils.InputValidation;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,7 +10,6 @@ public class BattleSystem {
     public static void main(String[] args) {
         
         Scanner input = new Scanner(System.in);
-
         System.out.println(ConsoleColor.BLUE.ansiCode + "WELCOME TO GAMEDEV " + ConsoleColor.RESET.ansiCode);
 
         System.out.println("Enter the name for your character");
@@ -214,7 +211,7 @@ public class BattleSystem {
                     if (bag.isEmpty()) {
                         System.out.println("Your bag is empty.");
                     } else {
-                        for (int i = 0; i <= bag.size(); i++) {
+                        for (int i = 0; i < bag.size(); i++) {
                             System.out.println((i + 1) + " - " + bag.get(i).getName());
                         }
                         System.out.println("0 - Return");

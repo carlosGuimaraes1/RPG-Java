@@ -1,7 +1,7 @@
 package domain.enums;
 
 public enum CharacterClass {
-    WARRIOR(1, 12, 8),
+    WARRIOR(1, 20, 8),
     MAGE(2, 8, 10),
     ARCHER(3, 10, 8);
 

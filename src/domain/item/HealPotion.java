@@ -6,7 +6,7 @@ import domain.entidy.Player;
 public class HealPotion extends Potion{
 
     public HealPotion() {
-        super("Healing potion", 15, 20);
+        super("Heal potion", 15, 20);
     }
 
     @Override

@@ -6,7 +6,7 @@ import domain.enums.ConsoleColor;
 public class StrengthPotion extends Potion{
 
     public StrengthPotion() {
-        super("Potion of strength", 10, 5);
+        super("Strength potion", 10, 5);
     }
 
     @Override

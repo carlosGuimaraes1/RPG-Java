@@ -1,11 +1,14 @@
 package domain.entidy;
+
 import domain.item.Potion;
+
 import java.util.ArrayList;
 
 public class Player extends Entity {
 
     private int gold;
     ArrayList<Potion> inventory;
+    private int stage = 1;
 
     public Player(String name, int currentLife, int strength, int defense) {
         super(name, currentLife, strength, defense);
@@ -30,12 +33,16 @@ public class Player extends Entity {
 
     @Override
     public String toString() {
-        return "You status: " +
-                ", gold: " + gold +
-                ", name: '" + name + '\'' +
-                ", currentLife: " + currentLife +
-                ", strength: " + strength +
-                ", defense: " + defense;
+        return "Player{" +
+                "gold=" + gold +
+                ", inventory=" + this.inventory.toString()+
+                ", stage=" + stage +
+                ", name='" + name + '\'' +
+                ", maxLife=" + maxLife +
+                ", currentLife=" + currentLife +
+                ", strength=" + strength +
+                ", defense=" + defense +
+                '}';
     }
 
     public int getGold() {
@@ -53,4 +60,13 @@ public class Player extends Entity {
     public void setInventory(ArrayList<Potion> inventory) {
         this.inventory = inventory;
     }
+
+    public int getStage() {
+        return stage;
+    }
+
+    public void setStage(int stage) {
+        this.stage = stage;
+    }
+
 }

@@ -3,6 +3,7 @@ package domain.item;
 import domain.enums.ConsoleColor;
 import domain.entidy.Player;
 
+
 public abstract class Potion {
     protected String name;
     protected int gold;
@@ -23,6 +24,11 @@ public abstract class Potion {
         System.out.println(color.ansiCode + " Item " + this.name.toUpperCase() + ConsoleColor.RESET.ansiCode);
         System.out.println("Price " + this.gold);
         System.out.println("Poder " + this.points);
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 
     public String getName() {

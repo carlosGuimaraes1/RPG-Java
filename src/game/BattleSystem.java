@@ -3,19 +3,19 @@ import domain.entidy.*;
 import domain.enums.*;
 import domain.item.*;
 import utils.InputValidation;
-import java.util.ArrayList;
-import java.util.Scanner;
+
+import java.util.*;
 
 public class BattleSystem {
     public static void main(String[] args) {
-        
         Scanner input = new Scanner(System.in);
-        System.out.println(ConsoleColor.BLUE.ansiCode + "WELCOME TO GAMEDEV " + ConsoleColor.RESET.ansiCode);
+
+        System.out.println(ConsoleColor.BLUE.ansiCode + "WELCOME TO GAME DEV "+ ConsoleColor.RESET.ansiCode);
 
         System.out.println("Enter the name for your character");
         String name = input.nextLine();
-        System.out.println("Choose your class:");
 
+        System.out.println("Choose your class:");
         CharacterClass selectedClass = null;
 
         while (selectedClass == null) {
@@ -72,7 +72,7 @@ public class BattleSystem {
         System.out.println("To start, you receive 10 gold.");
         player.setGold(10);
 
-        int stage = 1;
+        int stage = player.getStage();
 
         while (true) {
             System.out.println("1 - Battle: \n2 - Status: \n3 - Shop: \n4 - Inventory: \n0 - Exit:");
@@ -107,7 +107,7 @@ public class BattleSystem {
                             System.out.println();
                             System.out.println(ConsoleColor.YELLOW.ansiCode + "You receive 10 gold." + ConsoleColor.RESET.ansiCode);
                             player.setGold(player.getGold() + 10);
-                            stage++;
+                            player.setStage(player.getStage()+1);
                             System.out.println("Press Enter to continue...");
                             input.nextLine();
                             break;
@@ -118,7 +118,7 @@ public class BattleSystem {
                         int choiceDefend = InputValidation.readInt(input);
 
                         while (choiceDefend != 1 && choiceDefend != 2) {
-                            System.out.println("Numero Invalido! digite 1 ou 2");
+                            System.out.println("Invalid number! Please enter 1 or 2.");
                             System.out.println("1 - to defend \n2 - to dodge ");
                             choiceDefend = InputValidation.readInt(input);
                         }
@@ -136,7 +136,7 @@ public class BattleSystem {
                                 wolf.revive();
                                 orc.revive();
                                 dragon.revive();
-                                stage = 1;
+                                player.setStage(1);
                                 System.out.println("Press Enter to continue...");
                                 input.nextLine();
                                 break;
@@ -162,14 +162,13 @@ public class BattleSystem {
                                     wolf.revive();
                                     orc.revive();
                                     dragon.revive();
-                                    stage = 1;
+                                    player.setStage(1);
                                     System.out.println("Press Enter to continue...");
                                     input.nextLine();
                                     break;
                                 }
                             }
                         }
-
                     }
                     break;
                 case 2:
@@ -243,6 +242,5 @@ public class BattleSystem {
                     System.out.println("Invalid choice");
             }
         }
-
     }
 }

@@ -1,7 +1,9 @@
 package game;
+
 import domain.entidy.*;
 import domain.enums.*;
 import domain.item.*;
+import utils.GameSaver;
 import utils.InputValidation;
 
 import java.util.*;
@@ -10,7 +12,10 @@ public class BattleSystem {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
-        System.out.println(ConsoleColor.BLUE.ansiCode + "WELCOME TO GAME DEV "+ ConsoleColor.RESET.ansiCode);
+        System.out.println(ConsoleColor.BLUE.ansiCode + "WELCOME TO GAME DEV " + ConsoleColor.RESET.ansiCode);
+
+        System.out.println(ConsoleColor.GREEN.ansiCode + "1 - New Game " + ConsoleColor.RESET.ansiCode + ConsoleColor.YELLOW.ansiCode + "\n2 - Load Game " + ConsoleColor.RESET.ansiCode);
+        int choiceGame = InputValidation.readInt(input);
 
         System.out.println("Enter the name for your character");
         String name = input.nextLine();
@@ -73,7 +78,7 @@ public class BattleSystem {
         player.setGold(10);
 
         int stage = player.getStage();
-
+        // load game;
         while (true) {
             System.out.println("1 - Battle: \n2 - Status: \n3 - Shop: \n4 - Inventory: \n0 - Exit:");
             int choice = InputValidation.readInt(input);
@@ -107,7 +112,7 @@ public class BattleSystem {
                             System.out.println();
                             System.out.println(ConsoleColor.YELLOW.ansiCode + "You receive 10 gold." + ConsoleColor.RESET.ansiCode);
                             player.setGold(player.getGold() + 10);
-                            player.setStage(player.getStage()+1);
+                            player.setStage(player.getStage() + 1);
                             System.out.println("Press Enter to continue...");
                             input.nextLine();
                             break;
@@ -219,7 +224,7 @@ public class BattleSystem {
                         int item = InputValidation.readInt(input);
 
 
-                        if (item > 0 && item <=bag.size()) {
+                        if (item > 0 && item <= bag.size()) {
                             Potion selectPotion = bag.get(item - 1);
                             selectPotion.use(player);
                             bag.remove(item - 1);

@@ -38,7 +38,7 @@ public class Player extends Entity {
                 ", inventory=" + this.inventory.toString()+
                 ", stage=" + stage +
                 ", name='" + name + '\'' +
-                ", maxLife=" + maxLife +
+                ", maxLife=" + maxLifePlayer +
                 ", currentLife=" + currentLife +
                 ", strength=" + strength +
                 ", defense=" + defense +

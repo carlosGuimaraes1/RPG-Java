@@ -2,7 +2,8 @@ package domain.entidy;
 
 public abstract class Entity {
     protected String name;
-    protected int maxLife = 150;
+    protected final int maxLifePlayer = 150;
+    protected int maxLife;
     protected int currentLife;
     protected int strength;
     protected int defense;
@@ -37,10 +38,10 @@ public abstract class Entity {
     }
 
     public void heal(int amount) {
-        if (currentLife > maxLife) {
-            currentLife = maxLife;
-        }
         currentLife += amount;
+        if (currentLife > maxLifePlayer) {
+            currentLife = maxLifePlayer;
+        }
     }
 
     public void increaseStrength(int amount) {
@@ -51,8 +52,8 @@ public abstract class Entity {
         return name;
     }
 
-    public int getMaxLife() {
-        return maxLife;
+    public int getMaxLifePlayer() {
+        return maxLifePlayer;
     }
 
     public int getCurrentLife() {

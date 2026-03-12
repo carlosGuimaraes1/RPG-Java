@@ -18,9 +18,9 @@ public class GameSaver {
             String playerData = player.getName() + "," + player.getCurrentLife() + "," + player.getStrength() + "," + player.getDefense() + "," + player.getGold() + "," + player.getStage();
             bw.write(playerData);
             bw.flush();
-            bw.newLine();
-            StringBuilder bag = new StringBuilder();
             if (player.getInventory() != null && !player.getInventory().isEmpty()) {
+                StringBuilder bag = new StringBuilder();
+                bw.newLine();
                 for (int i = 0; i < player.getInventory().size(); i++) {
                     if (i == player.getInventory().size() - 1) {
                         bag.append(player.getInventory().get(i).getName());
@@ -29,8 +29,8 @@ public class GameSaver {
                     }
                 }
                 bw.write(bag.toString());
+                System.out.println(ConsoleColor.BLUE.ansiCode + "Game saved" + ConsoleColor.RESET.ansiCode);
             }
-            System.out.println(ConsoleColor.BLUE.ansiCode + "Game saved" + ConsoleColor.RESET.ansiCode);
         } catch (IOException e) {
             System.out.println("Failed to save game." + e);
         }
@@ -53,16 +53,19 @@ public class GameSaver {
             player = new Player(name, life, strength, defense);
             player.setGold(gold);
             player.setStage(stage);
+
             if (s.hasNextLine()) {
                 ArrayList<Potion> potions = new ArrayList<>();
                 String bag = s.nextLine();
-                if (bag.equals("Heal potion")) {
-                    potions.add(new HealPotion());
-                    player.setInventory(potions);
-                } else if (bag.equals("Strength potion")) {
-                    potions.add(new StrengthPotion());
-                    player.setInventory(potions);
+                String[] inv = bag.split(",");
+                for (int i = 0; i <inv.length ; i++) {
+                    if (inv[i].equals("Heal potion")) {
+                        potions.add(new HealPotion());
+                    } else if (inv[i].equals("Strength potion")) {
+                        potions.add(new StrengthPotion());
+                    }
                 }
+                player.setInventory(potions);
             }
             return player;
         } catch (IOException e) {

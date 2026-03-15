@@ -16,6 +16,9 @@ public abstract class Entity {
         this.defense = defense;
     }
 
+    public Entity() {
+    }
+
     public int receiveDamage(int damage) {
         int realDamage = damage - defense;
         if (realDamage<=0){

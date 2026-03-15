@@ -1,5 +1,7 @@
 package domain.entidy;
 
+import domain.enums.CharacterClass;
+import domain.enums.Difficulty;
 import domain.item.Potion;
 
 import java.util.ArrayList;
@@ -9,10 +11,18 @@ public class Player extends Entity {
     private int gold;
     ArrayList<Potion> inventory;
     private int stage = 1;
+    private CharacterClass characterClass;
+    private Difficulty difficulty;
 
-    public Player(String name, int currentLife, int strength, int defense) {
+    public Player(String name, int currentLife, int strength, int defense, Difficulty difficulty, CharacterClass characterClass) {
         super(name, currentLife, strength, defense);
         this.inventory = new ArrayList<>();
+        this.difficulty = difficulty;
+        this.characterClass = characterClass;
+
+    }
+
+    public Player() {
     }
 
     @Override
@@ -33,12 +43,15 @@ public class Player extends Entity {
 
     @Override
     public String toString() {
-        return "Player{" +
-                "gold=" + gold +
-                ", inventory=" + this.inventory.toString()+
-                ", stage=" + stage +
+        return "Player:" +
+                "gold: " + gold +
+                ", inventory: " + inventory +
+                ", stage: " + stage +
+                ", characterClass: " + characterClass +
+                ", difficulty=" + difficulty +
                 ", name='" + name + '\'' +
-                ", maxLife=" + maxLifePlayer +
+                ", maxLifePlayer=" + maxLifePlayer +
+                ", maxLife=" + maxLife +
                 ", currentLife=" + currentLife +
                 ", strength=" + strength +
                 ", defense=" + defense +
@@ -69,4 +82,19 @@ public class Player extends Entity {
         this.stage = stage;
     }
 
+    public CharacterClass getCharacterClass() {
+        return characterClass;
+    }
+
+    public void setCharacterClass(CharacterClass characterClass) {
+        this.characterClass = characterClass;
+    }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
 }

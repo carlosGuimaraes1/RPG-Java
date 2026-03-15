@@ -1,0 +1,1 @@
+test,89,10,8,20,2,WARRIOR,EASY

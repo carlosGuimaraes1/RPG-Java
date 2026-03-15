@@ -3,94 +3,105 @@ package game;
 import domain.entidy.*;
 import domain.enums.*;
 import domain.item.*;
-import utils.GameSaver;
-import utils.InputValidation;
+import utils.*;
 
+import java.io.File;
 import java.util.*;
 
 public class BattleSystem {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+        CharacterClass selectedClass = null;
+        Difficulty difficulty = null;
+        Player player = new Player();
+
+        GameSaver saver = new GameSaver();
 
         System.out.println(ConsoleColor.BLUE.ansiCode + "WELCOME TO GAME DEV " + ConsoleColor.RESET.ansiCode);
 
-        System.out.println(ConsoleColor.GREEN.ansiCode + "1 - New Game " + ConsoleColor.RESET.ansiCode + ConsoleColor.YELLOW.ansiCode + "\n2 - Load Game " + ConsoleColor.RESET.ansiCode);
-        int choiceGame = InputValidation.readInt(input);
+        File file = new File("saves", "save.txt");
+        if (file.exists()) {
+            System.out.println(ConsoleColor.GREEN.ansiCode + "1 - New Game " + ConsoleColor.RESET.ansiCode + ConsoleColor.YELLOW.ansiCode + "\n2 - Load Game " + ConsoleColor.RESET.ansiCode);
+            int choiceGame = InputValidation.readInt(input);
+            if (choiceGame == 2) {
+                player = saver.load();
+            } else {
 
-        System.out.println("Enter the name for your character");
-        String name = input.nextLine();
+                System.out.println("Enter the name for your character");
+                String name = input.nextLine();
 
-        System.out.println("Choose your class:");
-        CharacterClass selectedClass = null;
+                System.out.println("Choose your class:");
 
-        while (selectedClass == null) {
-            System.out.println(" 1 - for Warrior \n 2 - for Mage \n 3 - for Archer");
-            int classChoice = InputValidation.readInt(input);
+                while (selectedClass == null) {
 
-            switch (classChoice) {
-                case 1:
-                    selectedClass = CharacterClass.WARRIOR;
-                    break;
-                case 2:
-                    selectedClass = CharacterClass.MAGE;
-                    break;
-                case 3:
-                    selectedClass = CharacterClass.ARCHER;
-                    break;
-                default:
-                    System.out.println("Invalid choice.");
+                    System.out.println(" 1 - for Warrior \n 2 - for Mage \n 3 - for Archer");
+                    int classChoice = InputValidation.readInt(input);
+
+                    switch (classChoice) {
+                        case 1:
+                            selectedClass = CharacterClass.WARRIOR;
+                            player.setCharacterClass(selectedClass);
+                            break;
+                        case 2:
+                            selectedClass = CharacterClass.MAGE;
+                            player.setCharacterClass(selectedClass);
+                            break;
+                        case 3:
+                            selectedClass = CharacterClass.ARCHER;
+                            player.setCharacterClass(selectedClass);
+                            break;
+                        default:
+                            System.out.println("Invalid choice.");
+                    }
+                }
+                System.out.println("Choose the difficulty.");
+                while (difficulty == null) {
+                    System.out.println(" 1 - for Easy \n 2 - for Normal \n 3 - for Hard");
+                    int difficultyChoice = InputValidation.readInt(input);
+
+                    switch (difficultyChoice) {
+                        case 1:
+                            difficulty = Difficulty.EASY;
+                            player.setDifficulty(difficulty);
+                            break;
+                        case 2:
+                            difficulty = Difficulty.NORMAL;
+                            player.setDifficulty(difficulty);
+                            break;
+                        case 3:
+                            difficulty = Difficulty.HARD;
+                            player.setDifficulty(difficulty);
+                            break;
+                        default:
+                            System.out.println("Invalid choice.");
+                    }
+                }
+                player = new Player(name, 100, selectedClass.getStrength(), selectedClass.getDefense(), player.getDifficulty(), player.getCharacterClass());
+                System.out.println("To start, you receive 10 gold.");
+                player.setGold(10);
             }
         }
-        System.out.println("Choose the difficulty.");
 
-        Difficulty difficulty = null;
-        while (difficulty == null) {
-            System.out.println(" 1 - for Easy \n 2 - for Normal \n 3 - for Hard");
-            int difficultyChoice = InputValidation.readInt(input);
-
-            switch (difficultyChoice) {
-                case 1:
-                    difficulty = Difficulty.EASY;
-                    break;
-                case 2:
-                    difficulty = Difficulty.NORMAL;
-                    break;
-                case 3:
-                    difficulty = Difficulty.HARD;
-                    break;
-                default:
-                    System.out.println("Invalid choice.");
-            }
-        }
-
-        Enemy wolf = new Enemy("Wolf", 7, 3, difficulty.getReportname(), 80, 80, difficulty.getReportname(), "You hear a growl... A rabid beast is staring right at you.");
-        Enemy orc = new Enemy("Orc", 9, 5, difficulty.getReportname(), 100, 100, difficulty.getReportname(), "'FRESH MEAT!' screams a massive warrior charging at you.");
-        Enemy dragon = new Enemy("Dragon", 12, 7, difficulty.getReportname(), 120, 120, difficulty.getReportname(), "The air burns around you. An ancient terror has awakened!");
-
-        Player player = new Player(name, 100, selectedClass.getStrength(), selectedClass.getDefense());
+        Enemy wolf = new Enemy("Wolf", 7, 3, player.getDifficulty().toString(), 80, 80, player.getDifficulty().toString(), "You hear a growl... A rabid beast is staring right at you.");
+        Enemy orc = new Enemy("Orc", 9, 5, player.getDifficulty().toString(), 100, 100, player.getDifficulty().toString(), "'FRESH MEAT!' screams a massive warrior charging at you.");
+        Enemy dragon = new Enemy("Dragon", 12, 7, player.getDifficulty().toString(), 120, 120, player.getDifficulty().toString(), "The air burns around you. An ancient terror has awakened!");
 
         Potion healPotion = new HealPotion();
         Potion strengthPotion = new StrengthPotion();
 
         Shop shop = new Shop();
-
-        System.out.println("To start, you receive 10 gold.");
-        player.setGold(10);
-
-        int stage = player.getStage();
-        // load game;
         while (true) {
-            System.out.println("1 - Battle: \n2 - Status: \n3 - Shop: \n4 - Inventory: \n0 - Exit:");
+            System.out.println("1 - Battle: Stage(" + player.getStage() + ") \n2 - Status: \n3 - Shop: \n4 - Inventory: \n5 - Save: \n0 - Exit:");
             int choice = InputValidation.readInt(input);
 
             switch (choice) {
                 case 1:
-                    Enemy currentEnemy = null;
-                    if (stage == 1) {
+                    Enemy currentEnemy;
+                    if (player.getStage() == 1) {
                         currentEnemy = wolf;
-                    } else if (stage == 2) {
+                    } else if (player.getStage() == 2) {
                         currentEnemy = orc;
-                    } else if (stage == 3) {
+                    } else if (player.getStage() == 3) {
                         currentEnemy = dragon;
                     } else {
                         System.out.println(ConsoleColor.PURPLE.ansiCode + "You have become the strongest of the heroes." + ConsoleColor.RESET.ansiCode);
@@ -240,6 +251,8 @@ public class BattleSystem {
                         }
                     }
                     break;
+                case 5:
+                    saver.save(player);
                 case 0:
                     System.out.println("leaving the game");
                     return;

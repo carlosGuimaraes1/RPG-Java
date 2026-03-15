@@ -1,24 +1,24 @@
 package domain.enums;
 
 public enum CharacterClass {
-    WARRIOR(1, 20, 8),
-    MAGE(2, 8, 10),
-    ARCHER(3, 10, 8);
+    WARRIOR("Warrior", 10, 8),
+    MAGE("Mage", 8, 10),
+    ARCHER("Archer", 7, 8);
 
-    private int value;
     private int strength;
     private int defense;
     private String name;
+    private int value;
 
-    CharacterClass(int value, int strength, int defense) {
-        this.value = value;
+    CharacterClass(String name, int strength, int defense) {
+        this.name = name;
         this.strength = strength;
         this.defense = defense;
     }
 
-    public static CharacterClass searchClass(int value) {
+    public static CharacterClass searchClass(String name) {
         for (CharacterClass characterClass : values()) {
-            if (characterClass.getValue() == value) {
+            if (characterClass.getName().equals(name)) {
                 return characterClass;
             }
         }

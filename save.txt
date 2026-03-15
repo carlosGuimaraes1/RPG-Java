@@ -1,2 +1,0 @@
-ze,100,10,5,10,2
-Heal potion,Strength potion

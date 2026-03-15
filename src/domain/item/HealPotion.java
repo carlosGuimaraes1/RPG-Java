@@ -19,4 +19,8 @@ public class HealPotion extends Potion{
         return ConsoleColor.GREEN;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
 }

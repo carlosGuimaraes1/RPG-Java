@@ -1,5 +1,6 @@
 package game;
 
+import controller.InventoryController;
 import domain.entidy.*;
 import domain.enums.*;
 import domain.item.*;
@@ -14,7 +15,7 @@ public class BattleSystem {
         CharacterClass selectedClass = null;
         Difficulty difficulty = null;
         Player player = new Player();
-
+        List<Enemy> enemyList = new ArrayList<>();
         GameSaver saver = new GameSaver();
 
         System.out.println(ConsoleColor.BLUE.ansiCode + "WELCOME TO GAME DEV " + ConsoleColor.RESET.ansiCode);
@@ -25,69 +26,75 @@ public class BattleSystem {
             int choiceGame = InputValidation.readInt(input);
             if (choiceGame == 2) {
                 player = saver.load();
-            } else {
-
-                System.out.println("Enter the name for your character");
-                String name = input.nextLine();
-
-                System.out.println("Choose your class:");
-
-                while (selectedClass == null) {
-
-                    System.out.println(" 1 - for Warrior \n 2 - for Mage \n 3 - for Archer");
-                    int classChoice = InputValidation.readInt(input);
-
-                    switch (classChoice) {
-                        case 1:
-                            selectedClass = CharacterClass.WARRIOR;
-                            player.setCharacterClass(selectedClass);
-                            break;
-                        case 2:
-                            selectedClass = CharacterClass.MAGE;
-                            player.setCharacterClass(selectedClass);
-                            break;
-                        case 3:
-                            selectedClass = CharacterClass.ARCHER;
-                            player.setCharacterClass(selectedClass);
-                            break;
-                        default:
-                            System.out.println("Invalid choice.");
-                    }
+                if (player == null){
+                    System.out.println("Failed to load save. Starting new game...");
+                    return;
                 }
-                System.out.println("Choose the difficulty.");
-                while (difficulty == null) {
-                    System.out.println(" 1 - for Easy \n 2 - for Normal \n 3 - for Hard");
-                    int difficultyChoice = InputValidation.readInt(input);
-
-                    switch (difficultyChoice) {
-                        case 1:
-                            difficulty = Difficulty.EASY;
-                            player.setDifficulty(difficulty);
-                            break;
-                        case 2:
-                            difficulty = Difficulty.NORMAL;
-                            player.setDifficulty(difficulty);
-                            break;
-                        case 3:
-                            difficulty = Difficulty.HARD;
-                            player.setDifficulty(difficulty);
-                            break;
-                        default:
-                            System.out.println("Invalid choice.");
-                    }
-                }
-                player = new Player(name, 100, selectedClass.getStrength(), selectedClass.getDefense(), player.getDifficulty(), player.getCharacterClass());
-                System.out.println("To start, you receive 10 gold.");
-                player.setGold(10);
             }
+        } else {
+
+            System.out.println("Enter the name for your character");
+            String name = input.nextLine();
+
+            System.out.println("Choose your class:");
+
+            while (selectedClass == null) {
+
+                System.out.println(" 1 - for Warrior \n 2 - for Mage \n 3 - for Archer");
+                int classChoice = InputValidation.readInt(input);
+
+                switch (classChoice) {
+                    case 1:
+                        selectedClass = CharacterClass.WARRIOR;
+                        player.setCharacterClass(selectedClass);
+                        break;
+                    case 2:
+                        selectedClass = CharacterClass.MAGE;
+                        player.setCharacterClass(selectedClass);
+                        break;
+                    case 3:
+                        selectedClass = CharacterClass.ARCHER;
+                        player.setCharacterClass(selectedClass);
+                        break;
+                    default:
+                        System.out.println("Invalid choice.");
+                }
+            }
+            System.out.println("Choose the difficulty.");
+            while (difficulty == null) {
+                System.out.println(" 1 - for Easy \n 2 - for Normal \n 3 - for Hard");
+                int difficultyChoice = InputValidation.readInt(input);
+
+                switch (difficultyChoice) {
+                    case 1:
+                        difficulty = Difficulty.EASY;
+                        player.setDifficulty(difficulty);
+                        break;
+                    case 2:
+                        difficulty = Difficulty.NORMAL;
+                        player.setDifficulty(difficulty);
+                        break;
+                    case 3:
+                        difficulty = Difficulty.HARD;
+                        player.setDifficulty(difficulty);
+                        break;
+                    default:
+                        System.out.println("Invalid choice.");
+                }
+            }
+            player = new Player(name, 100, selectedClass.getStrength(), selectedClass.getDefense(), player.getDifficulty(), player.getCharacterClass());
+            System.out.println("To start, you receive 10 gold.");
+            player.setGold(10);
         }
+
 
         Enemy wolf = new Enemy("Wolf", 7, 3, player.getDifficulty().toString(), 80, 80, player.getDifficulty().toString(), "You hear a growl... A rabid beast is staring right at you.");
         Enemy orc = new Enemy("Orc", 9, 5, player.getDifficulty().toString(), 100, 100, player.getDifficulty().toString(), "'FRESH MEAT!' screams a massive warrior charging at you.");
         Enemy dragon = new Enemy("Dragon", 12, 7, player.getDifficulty().toString(), 120, 120, player.getDifficulty().toString(), "The air burns around you. An ancient terror has awakened!");
 
-        Potion healPotion = new HealPotion();
-        Potion strengthPotion = new StrengthPotion();
+        enemyList.add(wolf);
+        enemyList.add(orc);
+        enemyList.add(dragon);
 
         Shop shop = new Shop();
         while (true) {
@@ -97,92 +104,73 @@ public class BattleSystem {
             switch (choice) {
                 case 1:
                     Enemy currentEnemy;
-                    if (player.getStage() == 1) {
-                        currentEnemy = wolf;
-                    } else if (player.getStage() == 2) {
-                        currentEnemy = orc;
-                    } else if (player.getStage() == 3) {
-                        currentEnemy = dragon;
-                    } else {
-                        System.out.println(ConsoleColor.PURPLE.ansiCode + "You have become the strongest of the heroes." + ConsoleColor.RESET.ansiCode);
-                        input.nextLine();
-                        break;
-                    }
-                    System.out.println(ConsoleColor.PURPLE.ansiCode + currentEnemy.getDescription() + ConsoleColor.RESET.ansiCode);
+                    for (int i = player.getStage() - 1; i < enemyList.size(); i++) {
+                        currentEnemy = enemyList.get(i);
+                        System.out.println(ConsoleColor.PURPLE.ansiCode + currentEnemy.getDescription() + ConsoleColor.RESET.ansiCode);
 
-                    while (player.isAlive()) {
-                        System.out.println("=== Your Turn ===");
-                        player.attack(currentEnemy);
-                        System.out.println("\nYou dealt " + (player.getStrength() - currentEnemy.getDefense()) + " damage.");
-                        System.out.println("Enemy HP " + currentEnemy.getCurrentLife());
-                        System.out.println("Press Enter to continue...");
-                        input.nextLine();
+                        while (player.isAlive()) {
+                            System.out.println("=== Your Turn ===");
+                            player.attack(currentEnemy);
 
-                        if (!currentEnemy.isAlive()) {
-                            System.out.println(ConsoleColor.BLUE.ansiCode + "You defeated him." + ConsoleColor.RESET.ansiCode);
-                            System.out.println();
-                            System.out.println(ConsoleColor.YELLOW.ansiCode + "You receive 10 gold." + ConsoleColor.RESET.ansiCode);
-                            player.setGold(player.getGold() + 10);
-                            player.setStage(player.getStage() + 1);
+                            System.out.println("\nYou dealt " +  " damage.");
+                            System.out.println("Enemy HP " + currentEnemy.getCurrentLife());
                             System.out.println("Press Enter to continue...");
                             input.nextLine();
-                            break;
-                        }
-                        System.out.println("\n=== ENEMY TURN ===");
-                        System.out.println(currentEnemy.getName() + " prepares to attack\n");
-                        System.out.println("1 - to defend \n2 - to dodge ");
-                        int choiceDefend = InputValidation.readInt(input);
 
-                        while (choiceDefend != 1 && choiceDefend != 2) {
-                            System.out.println("Invalid number! Please enter 1 or 2.");
-                            System.out.println("1 - to defend \n2 - to dodge ");
-                            choiceDefend = InputValidation.readInt(input);
-                        }
-                        if (choiceDefend == 1) {
-                            double reducedDamage = currentEnemy.getStrength() - 2;
-                            int realDamage = player.receiveDamage((int) reducedDamage);
-
-                            System.out.println("You received " + realDamage + " damage.");
-                            System.out.println("Your life " + player.getCurrentLife());
-                            System.out.println("Press Enter to continue...");
-                            input.nextLine();
-                            if (!player.isAlive()) {
-                                System.out.println(ConsoleColor.RED.ansiCode + "game Over" + ConsoleColor.RESET.ansiCode);
-                                player.setCurrentLife(100);
-                                wolf.revive();
-                                orc.revive();
-                                dragon.revive();
-                                player.setStage(1);
+                            if (!currentEnemy.isAlive()) {
+                                System.out.println(ConsoleColor.BLUE.ansiCode + "You defeated him." + ConsoleColor.RESET.ansiCode);
+                                System.out.println();
+                                System.out.println(ConsoleColor.YELLOW.ansiCode + "You receive 10 gold." + ConsoleColor.RESET.ansiCode);
+                                player.setGold(player.getGold() + 10);
+                                player.nextStage();
                                 System.out.println("Press Enter to continue...");
                                 input.nextLine();
                                 break;
                             }
-                        }
-                        if (choiceDefend == 2) {
-                            if (player.dodge()) {
-                                System.out.println("you deviated. you received no harm.");
-                                System.out.println("Press Enter to continue...");
-                                input.nextLine();
-                            } else {
-                                int reducedDamage = (int) (currentEnemy.getStrength() * 1.5);
-                                int realDamage = player.receiveDamage(reducedDamage);
+                            System.out.println("\n=== ENEMY TURN ===");
+                            System.out.println(currentEnemy.getName() + " prepares to attack\n");
+                            System.out.println("1 - to defend \n2 - to dodge ");
+                            int choiceDefend = InputValidation.readInt(input);
+
+                            while (choiceDefend != 1 && choiceDefend != 2) {
+                                System.out.println("Invalid number! Please enter 1 or 2.");
+                                System.out.println("1 - to defend \n2 - to dodge ");
+                                choiceDefend = InputValidation.readInt(input);
+                            }
+                            if (choiceDefend == 1) {
+                                double reducedDamage = currentEnemy.getStrength() - 2;
+                                int realDamage = player.receiveDamage((int) reducedDamage);
 
                                 System.out.println("You received " + realDamage + " damage.");
                                 System.out.println("Your life " + player.getCurrentLife());
                                 System.out.println("Press Enter to continue...");
                                 input.nextLine();
-
-                                if (!player.isAlive()) {
-                                    System.out.println(ConsoleColor.RED.ansiCode + " game Over " + ConsoleColor.RESET.ansiCode);
-                                    player.setCurrentLife(100);
-                                    wolf.revive();
-                                    orc.revive();
-                                    dragon.revive();
-                                    player.setStage(1);
+                            }
+                            if (choiceDefend == 2) {
+                                if (player.dodge()) {
+                                    System.out.println("you deviated. you received no harm.");
                                     System.out.println("Press Enter to continue...");
                                     input.nextLine();
-                                    break;
+                                } else {
+                                    int reducedDamage = (int) (currentEnemy.getStrength() * 1.5);
+                                    int realDamage = player.receiveDamage(reducedDamage);
+
+                                    System.out.println("You received " + realDamage + " damage.");
+                                    System.out.println("Your life " + player.getCurrentLife());
+                                    System.out.println("Press Enter to continue...");
+                                    input.nextLine();
                                 }
+                            }
+                            if (!player.isAlive()) {
+                                System.out.println(ConsoleColor.RED.ansiCode + "game Over" + ConsoleColor.RESET.ansiCode);
+                                for (int j = 0; j < enemyList.size(); j++) {
+                                    enemyList.get(j).revive();
+                                }
+                                player.revive();
+                                player.resetStage();
+                                System.out.println("Press Enter to continue...");
+                                input.nextLine();
+                                break;
                             }
                         }
                     }
@@ -194,65 +182,15 @@ public class BattleSystem {
                     break;
 
                 case 3:
-                    System.out.println("=== MERCHANT ===");
-                    System.out.println("Your gold " + player.getGold());
-                    System.out.println("Which potion do you wish to buy?");
-
-                    healPotion.showDetails();
-                    strengthPotion.showDetails();
-
-                    while (true) {
-                        System.out.println("1 for buy healing potion \n2 for buy strength potion \n0 for exit");
-                        int choicePotion = InputValidation.readInt(input);
-
-                        if (choicePotion == 1) {
-                            shop.sell(player, choicePotion);
-                            System.out.println("You bought the healing potion. ");
-                        } else if (choicePotion == 2) {
-                            shop.sell(player, choicePotion);
-                            System.out.println("You bought the strength potion. ");
-                        } else if (choicePotion == 0) {
-                            System.out.println("leaving the shop");
-                            break;
-                        } else {
-                            System.out.println("Invalid choice.");
-                        }
-                    }
+                    shop.runShop(player, input);
                     break;
                 case 4:
-                    System.out.println("=== INVENTORY ===");
-                    ArrayList<Potion> bag = player.getInventory();
-
-                    if (bag.isEmpty()) {
-                        System.out.println("Your bag is empty.");
-                    } else {
-                        for (int i = 0; i < bag.size(); i++) {
-                            System.out.println((i + 1) + " - " + bag.get(i).getName());
-                        }
-                        System.out.println("0 - Return");
-
-                        System.out.println("Choose an item that you want to use.");
-                        int item = InputValidation.readInt(input);
-
-
-                        if (item > 0 && item <= bag.size()) {
-                            Potion selectPotion = bag.get(item - 1);
-                            selectPotion.use(player);
-                            bag.remove(item - 1);
-
-                            System.out.println("You use " + selectPotion.getName());
-                            System.out.println("Current Life: " + player.getCurrentLife());
-                            System.out.println("Current Strength: " + player.getStrength());
-
-                        } else if (item == 0) {
-                            System.out.println("Closing bag...");
-                        } else {
-                            System.out.println("Invalid item slot.");
-                        }
-                    }
+                    InventoryController invController = new InventoryController();
+                    invController.manageInventory(player, input);
                     break;
                 case 5:
                     saver.save(player);
+                    break;
                 case 0:
                     System.out.println("leaving the game");
                     return;

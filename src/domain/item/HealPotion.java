@@ -14,6 +14,7 @@ public class HealPotion extends Potion{
         player.heal(this.points);
     }
 
+
     @Override
     protected ConsoleColor getColorCode() {
         return ConsoleColor.GREEN;

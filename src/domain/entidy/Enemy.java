@@ -8,10 +8,9 @@ public class Enemy extends Entity {
 
     public Enemy(String name, int strength, int defense, String labelDamage, int currentLife, int maxLife,String labelLife, String description) {
         super(name, currentLife, strength, defense);
-        this.currentLife = currentLife;
-        this.maxLife = maxLife;
         increaseStrength(Difficulty.searchDifficultyDamage(labelDamage));
         heal(Difficulty.searchDifficultyLife(labelLife));
+        this.maxLife = maxLife;
         this.description = description;
     }
 
@@ -20,7 +19,8 @@ public class Enemy extends Entity {
         entidy.receiveDamage(strength);
     }
 
-    public void revive(){
+    @Override
+    public void revive() {
         setCurrentLife(maxLife);
     }
 

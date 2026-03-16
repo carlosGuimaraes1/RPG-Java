@@ -5,11 +5,13 @@ import domain.enums.Difficulty;
 import domain.item.Potion;
 
 import java.util.ArrayList;
+import java.util.List;
+
 
 public class Player extends Entity {
 
     private int gold;
-    ArrayList<Potion> inventory;
+    List<Potion> inventory;
     private int stage = 1;
     private CharacterClass characterClass;
     private Difficulty difficulty;
@@ -23,11 +25,18 @@ public class Player extends Entity {
     }
 
     public Player() {
+        this.inventory = new ArrayList<>();
     }
 
     @Override
     public void attack(Entity entidy) {
-        entidy.receiveDamage(strength);
+        double damage = entidy.receiveDamage(strength);
+        System.out.println(damage);
+    }
+
+    @Override
+    public void revive() {
+        setCurrentLife(maxLife);
     }
 
     public void addItem(Potion potion) {
@@ -39,6 +48,14 @@ public class Player extends Entity {
             return true;
         }
         return false;
+    }
+
+    public void nextStage() {
+        stage++;
+    }
+
+    public void resetStage() {
+        stage = 1;
     }
 
     @Override
@@ -58,6 +75,11 @@ public class Player extends Entity {
                 '}';
     }
 
+    public void useItem(int item) {
+        inventory.get(item).use(this);
+        inventory.remove(item);
+    }
+
     public int getGold() {
         return gold;
     }
@@ -66,11 +88,11 @@ public class Player extends Entity {
         this.gold = gold;
     }
 
-    public ArrayList<Potion> getInventory() {
+    public List<Potion> getInventory() {
         return inventory;
     }
 
-    public void setInventory(ArrayList<Potion> inventory) {
+    public void setInventory(List<Potion> inventory) {
         this.inventory = inventory;
     }
 
@@ -98,3 +120,4 @@ public class Player extends Entity {
         this.difficulty = difficulty;
     }
 }
+

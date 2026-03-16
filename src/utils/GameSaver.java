@@ -34,11 +34,11 @@ public class GameSaver {
                     }
                 }
                 bw.write(bag.toString());
-                System.out.println(ConsoleColor.BLUE.ansiCode + "Game saved" + ConsoleColor.RESET.ansiCode);
             }
         } catch (IOException e) {
             System.out.println("Failed to save game." + e);
         }
+        System.out.println(ConsoleColor.BLUE.ansiCode + "Game saved" + ConsoleColor.RESET.ansiCode);
     }
 
     public Player load() {

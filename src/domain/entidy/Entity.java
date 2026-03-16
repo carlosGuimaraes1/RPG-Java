@@ -39,11 +39,12 @@ public abstract class Entity {
         }
         return false;
     }
+    public abstract void revive();
 
     public void heal(int amount) {
         currentLife += amount;
-        if (currentLife > maxLifePlayer) {
-            currentLife = maxLifePlayer;
+        if (currentLife > maxLife) {
+            currentLife = maxLife;
         }
     }
 

@@ -1,5 +1,5 @@
 package controller;
-import domain.entidy.Player;
+import domain.entity.Player;
 import utils.InputValidation;
 import java.util.Scanner;
 public class InventoryController {

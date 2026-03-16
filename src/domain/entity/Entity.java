@@ -1,8 +1,8 @@
-package domain.entidy;
+package domain.entity;
 
 public abstract class Entity {
     protected String name;
-    protected final int maxLifePlayer = 150;
+
     protected int maxLife;
     protected int currentLife;
     protected int strength;
@@ -31,7 +31,7 @@ public abstract class Entity {
         return realDamage;
     }
 
-    public abstract void attack(Entity target);
+    public abstract int attack(Entity target);
 
     public boolean isAlive() {
         if (currentLife > 0) {
@@ -54,10 +54,6 @@ public abstract class Entity {
 
     public String getName() {
         return name;
-    }
-
-    public int getMaxLifePlayer() {
-        return maxLifePlayer;
     }
 
     public int getCurrentLife() {

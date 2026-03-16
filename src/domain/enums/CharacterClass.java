@@ -8,7 +8,6 @@ public enum CharacterClass {
     private int strength;
     private int defense;
     private String name;
-    private int value;
 
     CharacterClass(String name, int strength, int defense) {
         this.name = name;
@@ -23,10 +22,6 @@ public enum CharacterClass {
             }
         }
         return null;
-    }
-
-    public int getValue() {
-        return value;
     }
 
     public int getStrength() {

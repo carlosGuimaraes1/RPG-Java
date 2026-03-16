@@ -1,6 +1,6 @@
 package game;
 
-import domain.entidy.Player;
+import domain.entity.Player;
 import domain.item.HealPotion;
 import domain.item.Potion;
 import domain.item.StrengthPotion;

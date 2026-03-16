@@ -1,7 +1,7 @@
 package domain.item;
 
 import domain.enums.ConsoleColor;
-import domain.entidy.Player;
+import domain.entity.Player;
 
 public class HealPotion extends Potion{
 

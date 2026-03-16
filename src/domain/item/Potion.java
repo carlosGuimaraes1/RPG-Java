@@ -1,7 +1,7 @@
 package domain.item;
 
 import domain.enums.ConsoleColor;
-import domain.entidy.Player;
+import domain.entity.Player;
 
 
 public abstract class Potion {
@@ -23,7 +23,7 @@ public abstract class Potion {
         ConsoleColor color = getColorCode();
         System.out.println(color.ansiCode + " Item " + this.name.toUpperCase() + ConsoleColor.RESET.ansiCode);
         System.out.println("Price " + this.gold);
-        System.out.println("Poder " + this.points);
+        System.out.println("Power " + this.points);
     }
 
     @Override

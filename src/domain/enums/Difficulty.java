@@ -43,7 +43,11 @@ public enum Difficulty {
         return damageBonus;
     }
 
-    public String getReportname() {
+    public int getLifeBonus() {
+        return lifeBonus;
+    }
+
+    public String getLabel() {
         return label;
     }
 

@@ -1,4 +1,4 @@
-package domain.entidy;
+package domain.entity;
 
 import domain.enums.CharacterClass;
 import domain.enums.Difficulty;
@@ -11,7 +11,7 @@ import java.util.List;
 public class Player extends Entity {
 
     private int gold;
-    List<Potion> inventory;
+    private List<Potion> inventory;
     private int stage = 1;
     private CharacterClass characterClass;
     private Difficulty difficulty;
@@ -29,9 +29,8 @@ public class Player extends Entity {
     }
 
     @Override
-    public void attack(Entity entidy) {
-        double damage = entidy.receiveDamage(strength);
-        System.out.println(damage);
+    public int attack(Entity entity) {
+        return entity.receiveDamage(strength);
     }
 
     @Override
@@ -67,8 +66,6 @@ public class Player extends Entity {
                 ", characterClass: " + characterClass +
                 ", difficulty=" + difficulty +
                 ", name='" + name + '\'' +
-                ", maxLifePlayer=" + maxLifePlayer +
-                ", maxLife=" + maxLife +
                 ", currentLife=" + currentLife +
                 ", strength=" + strength +
                 ", defense=" + defense +

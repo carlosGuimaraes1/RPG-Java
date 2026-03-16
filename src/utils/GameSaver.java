@@ -1,20 +1,22 @@
 package utils;
 
-import domain.entidy.Player;
+import domain.entity.Player;
 import domain.enums.*;
 import domain.item.*;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameSaver {
     public void save(Player player) {
+
         File fileDirectory = new File("saves");
-        if (!fileDirectory.exists()){
+        if (!fileDirectory.exists()) {
             boolean mkdir = fileDirectory.mkdir();
         }
-        File file = new File(fileDirectory,"save.txt");
-
+        File file = new File(fileDirectory, "save.txt");
+        boolean saved = false;
         try (FileWriter fw = new FileWriter(file);
              BufferedWriter bw = new BufferedWriter(fw)) {
 
@@ -35,15 +37,18 @@ public class GameSaver {
                 }
                 bw.write(bag.toString());
             }
+            saved = true;
         } catch (IOException e) {
             System.out.println("Failed to save game." + e);
         }
-        System.out.println(ConsoleColor.BLUE.ansiCode + "Game saved" + ConsoleColor.RESET.ansiCode);
+        if (saved) {
+            System.out.println(ConsoleColor.BLUE.ansiCode + "Game saved" + ConsoleColor.RESET.ansiCode);
+        }
     }
 
     public Player load() {
         Player player;
-        File file = new File("saves","save.txt");
+        File file = new File("saves", "save.txt");
         try (Scanner s = new Scanner(file)) {
             String playerStatus = s.nextLine();
 

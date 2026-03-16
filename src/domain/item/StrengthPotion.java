@@ -1,6 +1,6 @@
 package domain.item;
 
-import domain.entidy.Player;
+import domain.entity.Player;
 import domain.enums.ConsoleColor;
 
 public class StrengthPotion extends Potion{

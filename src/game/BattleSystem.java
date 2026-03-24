@@ -37,9 +37,9 @@ public class BattleSystem {
             }
         }
 
-        Enemy wolf = new Enemy("Wolf", 9, 3, player.getDifficulty(), 80, "You hear a growl... A rabid beast is staring right at you.");
-        Enemy orc = new Enemy("Orc", 10, 5, player.getDifficulty(), 100, "'FRESH MEAT!' screams a massive warrior charging at you.");
-        Enemy dragon = new Enemy("Dragon", 14, 7, player.getDifficulty(), 120, "The air burns around you. An ancient terror has awakened!");
+        Enemy wolf = new Enemy("Wolf", 12, 3, player.getDifficulty(), 80, "You hear a growl... A rabid beast is staring right at you.");
+        Enemy orc = new Enemy("Orc", 14, 5, player.getDifficulty(), 100, "'FRESH MEAT!' screams a massive warrior charging at you.");
+        Enemy dragon = new Enemy("Dragon", 16, 7, player.getDifficulty(), 120, "The air burns around you. An ancient terror has awakened!");
         enemyList.add(wolf);
         enemyList.add(orc);
         enemyList.add(dragon);

@@ -1,7 +1,6 @@
 package game;
 
-import controller.GameController;
-import controller.InventoryController;
+import controller.*;
 import domain.entity.*;
 import domain.enums.*;
 import utils.*;
@@ -38,20 +37,20 @@ public class BattleSystem {
             }
         }
 
-        Enemy wolf = new Enemy("Wolf", 7, 3, player.getDifficulty(), 80, "You hear a growl... A rabid beast is staring right at you.");
-        Enemy orc = new Enemy("Orc", 9, 5, player.getDifficulty(), 100, "'FRESH MEAT!' screams a massive warrior charging at you.");
-        Enemy dragon = new Enemy("Dragon", 12, 7, player.getDifficulty(), 120, "The air burns around you. An ancient terror has awakened!");
+        Enemy wolf = new Enemy("Wolf", 80, 3, player.getDifficulty(), 80, "You hear a growl... A rabid beast is staring right at you.");
+        Enemy orc = new Enemy("Orc", 10, 5, player.getDifficulty(), 100, "'FRESH MEAT!' screams a massive warrior charging at you.");
+        Enemy dragon = new Enemy("Dragon", 14, 7, player.getDifficulty(), 120, "The air burns around you. An ancient terror has awakened!");
         enemyList.add(wolf);
         enemyList.add(orc);
         enemyList.add(dragon);
 
         while (true) {
-            if (player.getStage() > enemyList.size()){
-                System.out.println(ConsoleColor.YELLOW.ansiCode+ "1 - Battle:(New enemies coming soon...)" + ConsoleColor.RESET.ansiCode);
-            }else{
-                System.out.println(ConsoleColor.BLUE.ansiCode+ "1 - Battle: Stage("+player.getStage()+") " + ConsoleColor.RESET.ansiCode);
+            if (player.getStage() > enemyList.size()) {
+                System.out.println(ConsoleColor.YELLOW.ansiCode + "1 - Battle:(New enemies coming soon...)" + ConsoleColor.RESET.ansiCode);
+            } else {
+                System.out.println(ConsoleColor.BLUE.ansiCode + "1 - Battle: Stage(" + player.getStage() + ") " + ConsoleColor.RESET.ansiCode);
             }
-            System.out.println(ConsoleColor.BLUE.ansiCode+"2 - Status \n3 - Shop \n4 - Inventory \n5 - Save \n0 - Exit:" + ConsoleColor.RESET.ansiCode);
+            System.out.println(ConsoleColor.BLUE.ansiCode + "2 - Status \n3 - Shop \n4 - Inventory \n5 - Save \n0 - Exit:" + ConsoleColor.RESET.ansiCode);
             int choice = InputValidation.readInt(input);
             switch (choice) {
                 case 1:

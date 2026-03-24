@@ -64,7 +64,7 @@ public class GameController {
 
     public void runBattle(Player player, List<Enemy> enemyList, Scanner input) {
         if (player.getStage() > enemyList.size()) {
-            System.out.println(ConsoleColor.BLUE.ansiCode+"No enemies remain. New challengers coming soon..."+ConsoleColor.RESET.ansiCode);
+            System.out.println(ConsoleColor.BLUE.ansiCode + "No enemies remain. New challengers coming soon..." + ConsoleColor.RESET.ansiCode);
             return;
         }
         Enemy currentEnemy = enemyList.get(player.getStage() - 1);
@@ -84,7 +84,7 @@ public class GameController {
                 System.out.println(ConsoleColor.BLUE.ansiCode + "You defeated him." + ConsoleColor.RESET.ansiCode);
                 System.out.println();
                 if (player.getStage() > enemyList.size()) {
-                    System.out.println(ConsoleColor.GREEN.ansiCode+"The dungeon has been cleansed. You have proven your worth and become the strongest among the strong!"+ConsoleColor.RESET.ansiCode);
+                    System.out.println(ConsoleColor.GREEN.ansiCode + "The dungeon has been cleansed. You have proven your worth and become the strongest among the strong!" + ConsoleColor.RESET.ansiCode);
                 }
                 System.out.println(ConsoleColor.YELLOW.ansiCode + "You receive 10 gold." + ConsoleColor.RESET.ansiCode);
                 System.out.println("Press Enter to continue...");
@@ -126,7 +126,7 @@ public class GameController {
                 }
             }
             if (!player.isAlive()) {
-                System.out.println(ConsoleColor.RED.ansiCode + "game Over" + ConsoleColor.RESET.ansiCode);
+                System.out.println(ConsoleColor.RED.ansiCode + "Game Over" + ConsoleColor.RESET.ansiCode);
                 for (Enemy enemy : enemyList) {
                     enemy.revive();
                 }

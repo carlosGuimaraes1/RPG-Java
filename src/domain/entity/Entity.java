@@ -12,6 +12,7 @@ public abstract class Entity {
     public Entity(String name, int currentLife, int strength, int defense) {
         this.name = name;
         this.currentLife = currentLife;
+        maxLife = this.currentLife;
         this.strength = strength;
         this.defense = defense;
     }

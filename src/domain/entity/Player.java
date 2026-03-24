@@ -21,7 +21,6 @@ public class Player extends Entity {
         this.inventory = new ArrayList<>();
         this.difficulty = difficulty;
         this.characterClass = characterClass;
-
     }
 
     public Player() {

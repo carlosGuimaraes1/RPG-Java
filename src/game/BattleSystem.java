@@ -4,7 +4,6 @@ import controller.*;
 import domain.entity.*;
 import domain.enums.*;
 import utils.*;
-
 import java.io.File;
 import java.util.*;
 
@@ -37,9 +36,9 @@ public class BattleSystem {
             }
         }
 
-        Enemy wolf = new Enemy("Wolf", 12, 3, player.getDifficulty(), 80, "You hear a growl... A rabid beast is staring right at you.");
-        Enemy orc = new Enemy("Orc", 14, 5, player.getDifficulty(), 100, "'FRESH MEAT!' screams a massive warrior charging at you.");
-        Enemy dragon = new Enemy("Dragon", 16, 7, player.getDifficulty(), 120, "The air burns around you. An ancient terror has awakened!");
+        Enemy wolf = new Enemy("Wolf", 12, 3, player.getDifficulty(), 80, "You hear a growl... A rabid beast is staring right at you.", 10);
+        Enemy orc = new Enemy("Orc", 14, 5, player.getDifficulty(), 100, "'FRESH MEAT!' screams a massive warrior charging at you.", 15);
+        Enemy dragon = new Enemy("Dragon", 16, 7, player.getDifficulty(), 120, "The air burns around you. An ancient terror has awakened!", 20);
         enemyList.add(wolf);
         enemyList.add(orc);
         enemyList.add(dragon);

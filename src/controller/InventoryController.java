@@ -3,7 +3,9 @@ import domain.entity.Player;
 import utils.InputValidation;
 import java.util.Scanner;
 public class InventoryController {
+
     public void manageInventory(Player player, Scanner input) {
+
         System.out.println("=== INVENTORY ===");
         if (player.getInventory().isEmpty()) {
             System.out.println("Your bag is empty.");
@@ -18,6 +20,7 @@ public class InventoryController {
 
             if (item > 0 && item <= player.getInventory().size()) {
                 String namePotion = player.getInventory().get(item-1).getName();
+
                 player.useItem(item-1);
                 System.out.println("You use " + namePotion);
                 System.out.println("Current Life: " + player.getCurrentLife());

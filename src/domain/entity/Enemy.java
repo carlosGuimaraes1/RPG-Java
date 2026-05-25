@@ -4,13 +4,15 @@ import domain.enums.Difficulty;
 public class Enemy extends Entity {
 
     private String description;
+    private int xp;
 
-    public Enemy(String name, int strength, int defense, Difficulty difficulty, int maxLife, String description) {
+    public Enemy(String name, int strength, int defense, Difficulty difficulty, int maxLife, String description, int xp) {
         super(name, maxLife, strength, defense);
         increaseStrength(difficulty.getBuffdamege());
         this.maxLife = maxLife + difficulty.getLifeBonus();
         this.currentLife = this.maxLife;
         this.description = description;
+        this.xp = xp;
     }
 
     @Override
@@ -27,4 +29,7 @@ public class Enemy extends Entity {
         return description;
     }
 
+    public int getXp() {
+        return xp;
+    }
 }

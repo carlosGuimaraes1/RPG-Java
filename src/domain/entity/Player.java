@@ -7,20 +7,22 @@ import domain.item.Potion;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Player extends Entity {
-
     private int gold;
     private List<Potion> inventory;
     private int stage = 1;
     private CharacterClass characterClass;
     private Difficulty difficulty;
+    private int level;
+    private int xp;
 
     public Player(String name, int currentLife, int strength, int defense, Difficulty difficulty, CharacterClass characterClass) {
         super(name, currentLife, strength, defense);
         this.inventory = new ArrayList<>();
         this.difficulty = difficulty;
         this.characterClass = characterClass;
+        level = 1;
+        xp = 0;
     }
 
     public Player() {
@@ -54,6 +56,18 @@ public class Player extends Entity {
 
     public void resetStage() {
         stage = 1;
+    }
+
+    public boolean levelUp() {
+        int xpForLevelUp = 10;
+        if (xp >= xpForLevelUp) {
+            xpForLevelUp = (xpForLevelUp * 2);
+            level++;
+            strength+=1;
+            defense+=1;
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -114,6 +128,22 @@ public class Player extends Entity {
 
     public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getXp() {
+        return xp;
+    }
+
+    public void setXp(int xp) {
+        this.xp = xp;
     }
 }
 

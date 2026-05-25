@@ -2,12 +2,10 @@ package domain.entity;
 
 public abstract class Entity {
     protected String name;
-
     protected int maxLife;
     protected int currentLife;
     protected int strength;
     protected int defense;
-
 
     public Entity(String name, int currentLife, int strength, int defense) {
         this.name = name;

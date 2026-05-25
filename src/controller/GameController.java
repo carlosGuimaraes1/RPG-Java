@@ -7,8 +7,7 @@ import utils.InputValidation;
 import java.util.List;
 import java.util.Scanner;
 
-public class GameController {
-
+public class GameController { 
     public Player createNewPlayer(Scanner input) {
         System.out.println("Enter the name for your character");
         String name = input.nextLine();
@@ -87,6 +86,8 @@ public class GameController {
                     System.out.println(ConsoleColor.GREEN.ansiCode + "The dungeon has been cleansed. You have proven your worth and become the strongest among the strong!" + ConsoleColor.RESET.ansiCode);
                 }
                 System.out.println(ConsoleColor.YELLOW.ansiCode + "You receive 10 gold." + ConsoleColor.RESET.ansiCode);
+                player.setXp(currentEnemy.getXp());
+                if (player.levelUp()) System.out.println("You have leveled up to level"+ player.getLevel()+"\nYou gained 1 more point in strength and defense. ");
                 System.out.println("Press Enter to continue...");
                 input.nextLine();
                 break;
@@ -139,7 +140,3 @@ public class GameController {
         }
     }
 }
-
-
-
-

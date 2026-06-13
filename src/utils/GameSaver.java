@@ -16,7 +16,7 @@ public class GameSaver {
             boolean mkdir = fileDirectory.mkdir();
         }
         File file = new File(fileDirectory, "save.txt");
-        boolean saved = false;
+
         try (FileWriter fw = new FileWriter(file);
              BufferedWriter bw = new BufferedWriter(fw)) {
 
@@ -37,12 +37,9 @@ public class GameSaver {
                 }
                 bw.write(bag.toString());
             }
-            saved = true;
+            System.out.println(ConsoleColor.BLUE.ansiCode + "Game saved" + ConsoleColor.RESET.ansiCode);
         } catch (IOException e) {
             System.out.println("Failed to save game." + e);
-        }
-        if (saved) {
-            System.out.println(ConsoleColor.BLUE.ansiCode + "Game saved" + ConsoleColor.RESET.ansiCode);
         }
     }
 

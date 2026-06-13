@@ -87,7 +87,7 @@ public class GameController {
                 }
                 System.out.println(ConsoleColor.YELLOW.ansiCode + "You receive 10 gold." + ConsoleColor.RESET.ansiCode);
                 player.setXp(currentEnemy.getXp());
-                if (player.levelUp()) System.out.println("You have leveled up to level"+ player.getLevel()+"\nYou gained 1 more point in strength and defense. ");
+                if (player.levelUp()) System.out.println("You have leveled up to level "+ player.getLevel()+"\nYou gained 1 more point in strength and defense. ");
                 System.out.println("Press Enter to continue...");
                 input.nextLine();
                 break;

@@ -72,16 +72,14 @@ public class Player extends Entity {
 
     @Override
     public String toString() {
-        return "Player:" +
-                "gold: " + gold +
-                ", inventory: " + inventory +
-                ", stage: " + stage +
-                ", characterClass: " + characterClass +
+        return "Player{" +
+                "gold=" + gold +
+                ", inventory=" + inventory +
+                ", stage=" + stage +
+                ", characterClass=" + characterClass +
                 ", difficulty=" + difficulty +
-                ", name='" + name + '\'' +
-                ", currentLife=" + currentLife +
-                ", strength=" + strength +
-                ", defense=" + defense +
+                ", level=" + level +
+                ", xp=" + xp +
                 '}';
     }
 

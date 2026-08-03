@@ -1,27 +1,23 @@
-# RPG Java
+Aqui está a tradução:
 
-A turn-based RPG battle system built in pure Java, featuring character progression, combat mechanics, and an interactive menu system.
+RPG Java
 
-## Features
+Um sistema de batalha por turnos em Java puro, com progressão de personagem, mecânicas de combate e um sistema de menu interativo.
 
-- Turn-based battle system with dodge mechanics
-- 3 character classes to choose from (Warrior, Mage, Archer)
-- 3 difficulty levels (Easy, Normal, Hard)
-- Character upgrade system
-- Shop to buy healing and strength potions
-- Inventory management
-- Interactive menu (Battle, Shop, Inventory)
-- Save system to preserve your progress
-
-## Technologies
-
-- Java 21
-- FileWriter + BufferedWriter for save system
-- Pure Java (no external libraries)
-
-## Project Structure
-
-```
+Funcionalidades
+Sistema de batalha por turnos com mecânica de esquiva
+3 classes de personagem para escolher (Guerreiro, Mago, Arqueiro)
+3 níveis de dificuldade (Fácil, Normal, Difícil)
+Sistema de upgrade de personagem
+Loja para comprar poções de cura e força
+Gerenciamento de inventário
+Menu interativo (Batalha, Loja, Inventário)
+Sistema de save para preservar seu progresso
+Tecnologias
+Java 21
+FileWriter + BufferedWriter para o sistema de save
+Java puro (sem bibliotecas externas)
+Estrutura do Projeto
 src/
 └── main/
     └── java/
@@ -47,56 +43,53 @@ src/
         └── utils/
             ├── GameSaver.java
             └── InputValidation.java
-```
+Como Jogar
 
-## How to Play
+Execute a aplicação e siga o menu interativo:
 
-Run the application and follow the interactive menu:
+Criação de Personagem
 
-### Character Setup
-```
-Enter your name:
-Choose your class:
-  1. Warrior (Strength: 10, Defense: 8)
-  2. Mage    (Strength: 8,  Defense: 10)
-  3. Archer  (Strength: 7,  Defense: 8)
+Digite seu nome:
+Escolha sua classe:
+  1. Guerreiro (Força: 10, Defesa: 8)
+  2. Mago      (Força: 8,  Defesa: 10)
+  3. Arqueiro  (Força: 7,  Defesa: 8)
 
-Choose difficulty:
-  1. Easy
+Escolha a dificuldade:
+  1. Fácil
   2. Normal
-  3. Hard
-```
+  3. Difícil
 
-### Main Menu
-```
-=== Main Menu ===
-1. Battle
-2. Shop
-3. Inventory
-4. Save
-5. Exit
-```
+Menu Principal
 
-### Battle System
-- Turn-based combat against enemies
-- Dodge mechanic to avoid incoming attacks
-- Defeat enemies to earn gold and progress through stages
+=== Menu Principal ===
+1. Batalha
+2. Loja
+3. Inventário
+4. Salvar
+5. Sair
 
-### Shop
-- Buy Heal Potions to restore life
-- Buy Strength Potions to boost attack
-- Manage your inventory strategically
+Sistema de Batalha
 
-### Progression
-- Upgrade your character stats after battles
-- Face stronger enemies as you advance stages
-- Difficulty affects enemy damage and life bonuses
+Combate por turnos contra inimigos
+Mecânica de esquiva para evitar ataques recebidos
+Derrote inimigos para ganhar ouro e avançar nas fases
 
-## Save System
+Loja
 
-Progress is saved to a `.txt` file using `FileWriter` and `BufferedWriter`, storing player stats, stage, class, difficulty, and inventory.
+Compre Poções de Cura para restaurar vida
+Compre Poções de Força para aumentar o ataque
+Gerencie seu inventário estrategicamente
 
-```
+Progressão
+
+Melhore os atributos do seu personagem após as batalhas
+Enfrente inimigos mais fortes conforme avança nas fases
+A dificuldade afeta o dano e o bônus de vida dos inimigos
+
+Sistema de Save
+
+O progresso é salvo em um arquivo .txt usando FileWriter e BufferedWriter, armazenando os atributos do jogador, fase, classe, dificuldade e inventário.
+
 saves/
 └── save.txt
-```
